@@ -1,26 +1,24 @@
-package com.example.gymhelper.data.repository
+package com.example.gymhelper.data.model
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.tasks.await
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class AuthRepository(private val firebaseAuth: FirebaseAuth) {
-    suspend fun signInWithGoogle(account: GoogleSignInAccount): Boolean {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        return try {
-            firebaseAuth.signInWithCredential(credential).await()
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
+@Entity(tableName = "workouts")
+data class WorkoutData(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val userId: String,
+    val name: String,
+    val date: Long,
+    val exercises: List<Exercise>
+)
 
-    fun signOut() {
-        firebaseAuth.signOut()
-    }
+data class Exercise(
+    val name: String,
+    val sets: List<Set>
+)
 
-    fun getCurrentUserId(): String? {
-        return firebaseAuth.currentUser?.uid
-    }
-}
+data class Set(
+    val weight: Float,
+    val reps: Int
+)
+

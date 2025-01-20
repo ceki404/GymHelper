@@ -1,19 +1,21 @@
 package com.example.gymhelper.data.local
 
-import androidx.room.TypeConverter
-import com.example.gymhelper.data.model.Exercise
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import androidx.room.*
+import com.example.gymhelper.data.model.WorkoutData
+import kotlinx.coroutines.flow.Flow
 
-class Converters {
-    @TypeConverter
-    fun fromExerciseList(value: List<Exercise>): String {
-        return Gson().toJson(value)
-    }
+@Dao
+interface WorkoutDao {
+    @Query("SELECT * FROM workouts WHERE userId = :userId")
+    fun getWorkoutsForUser(userId: String): Flow<List<WorkoutData>>
 
-    @TypeConverter
-    fun toExerciseList(value: String): List<Exercise> {
-        val listType = object : TypeToken<List<Exercise>>() {}.type
-        return Gson().fromJson(value, listType)
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWorkout(workout: WorkoutData)
+
+    @Update
+    suspend fun updateWorkout(workout: WorkoutData)
+
+    @Delete
+    suspend fun deleteWorkout(workout: WorkoutData)
 }
+
