@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "479449146674",
+    "project_id": "gymhelper-a09a9",
+    "storage_bucket": "gymhelper-a09a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479449146674:android:9565615c26a87c3c50a32b",
+        "android_client_info": {
+          "package_name": "com.example.gymhelper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfQDz5v6ogaMyQsziymxEIlc06WYrUhtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
